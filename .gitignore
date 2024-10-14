@@ -1,0 +1,59 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+env/
+.venv/
+
+# Poetry virtual environment cache
+poetry.lock
+
+# If using poetry, cache directories
+.cache/
+poetry.lock
+
+# Environment variables
+.env
+.env.*
+
+# Test output and coverage
+.coverage
+htmlcov/
+.tox/
+noxfile.py
+.coverage.*
+.cache/
+.pytest_cache/
+test-results/
+
+# Logs and runtime files
+*.log
+*.pot
+*.pid
+*.gz
+*.db
+*.sqlite3
+*.py[cod]
+*.log
+
+# macOS files
+.DS_Store
+
+# Node.js dependencies (if you have any frontend work in the FastAPI project)
+node_modules/
+
+# Uvicorn logs
+*.log
+
+# Editor specific files
+.vscode/
+.idea/
+*.swp
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "covergo-intelligent-underwriting"
+version = "0.1.0"
+description = ""
+authors = ["Son Nguyen <vanson.nguyen@covergo.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+fastapi = "^0.115.0"
+uvicorn = "^0.31.1"
+openai = "^1.51.2"
+pydantic = "^2.9.2"
+
+[tool.poetry.scripts]
+runserver = "run_server:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
