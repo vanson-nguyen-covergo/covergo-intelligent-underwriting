@@ -86,7 +86,7 @@ def assess_motor_insurance_risk(data: MotorInsuranceRequest) -> MotorInsuranceRe
         """}
     ]
 
-    # response = call_openai_api(messages)
+    response = call_openai_api(messages)
     
     return MotorInsuranceResponse(
         riskLevel="Low",

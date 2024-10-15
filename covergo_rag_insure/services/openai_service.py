@@ -1,10 +1,14 @@
-# covergo_rag_insure/services/openai_service.py
-
-import openai
 import os
+import logging
+import openai
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configure the OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def call_openai_api(messages: list) -> str:
     """
@@ -16,11 +20,16 @@ def call_openai_api(messages: list) -> str:
     Returns:
         str: The response from the OpenAI API.
     """
-    response = openai.ChatCompletion.create(
+    logging.info(f"OpenAI request")
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages,
         max_tokens=300,
         temperature=0.7
     )
 
-    return response.choices[0].message['content']
+    response = response.choices[0].message.content
+    
+    logging.info(f"OpenAI response: {response}")
+
+    return response

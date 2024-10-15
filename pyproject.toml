@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "covergo-intelligent-underwriting"
+name = "covergo_rag_insure"
 version = "0.1.0"
 description = ""
 authors = ["Son Nguyen <vanson.nguyen@covergo.com>"]
