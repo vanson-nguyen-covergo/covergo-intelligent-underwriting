@@ -33,25 +33,11 @@ class PremiumRange(BaseModel):
     min: float
     max: float
 
-class DetailItem(BaseModel):
-    category_code: str = Field(..., description="The code representing the category of the assessment (e.g., AGE_EXP, VEHICLE_USE).")
-    answer: str = Field(..., description="Detailed explanation or justification for the risk factor in this category.")
-    score: float = Field(..., description="The risk score for this category, ranging from 0 to 1.")
-
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "category_code": "AGE_EXP",
-                "answer": "At 55 years old with only 2 years of driving experience, the driver is still relatively inexperienced, especially in an urban setting like Hong Kong. The lack of extensive driving experience at an older age poses a significant risk due to potential slower reaction times and less familiarity with complex traffic situations.",
-                "score": 0.8
-            }
-        }
-
 class MotorInsuranceResponse(BaseModel):
     riskLevel: str
     premiumRange: List[PremiumRange]
     score: float
-    detail: List[DetailItem]
+    detail: str
 
     class Config:
         json_schema_extra = {
@@ -61,13 +47,7 @@ class MotorInsuranceResponse(BaseModel):
                     {"min": 2000.0, "max": 3500.0}
                 ],
                 "score": 0.75,
-                "detail": [
-                    {
-                        "category_code": "AGE_EXP",
-                        "answer": "The driver has a moderate amount of driving experience for their age, which reduces the overall risk.",
-                        "score": 0.8
-                    }
-                ]
+                "detail": "At 55 years old with only 2 years of driving experience, the driver is still relatively inexperienced, especially in an urban setting like Hong Kong. The lack of extensive driving experience at an older age poses a significant risk due to potential slower reaction times and less familiarity with complex traffic situations."
             }
         }
 

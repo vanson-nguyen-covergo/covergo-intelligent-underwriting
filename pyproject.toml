@@ -11,6 +11,8 @@ fastapi = "^0.115.0"
 uvicorn = "^0.31.1"
 openai = "^1.51.2"
 pydantic = "^2.9.2"
+requests = "^2.32.3"
+pymemcache = "^4.0.0"
 
 [tool.poetry.scripts]
 runserver = "run_server:main"

@@ -31,6 +31,7 @@ def build_chat_message() -> list[str]:
         1. Risk level (Low, Medium, High)
         2. Suggested premium range in HKD (e.g., HKD 2,000 - 3,500)
         3. Justification for the risk level, considering local factors in Hong Kong
+        4. Do I need manual review for this case?
       """
     }
    ]

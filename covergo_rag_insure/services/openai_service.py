@@ -1,16 +1,16 @@
+import json
+from pymemcache.client import base
 import os
-import logging
+import time
 import openai
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from covergo_rag_insure.common.logger import logger
 
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+cache = base.Client(('localhost', 11211))
 
 # Configure the OpenAI API key
 
-def call_openai_api(messages: list) -> str:
+def call_openai_api(request_id, messages: list):
     """
     Calls the OpenAI API with the provided messages to assess risk.
     
@@ -20,16 +20,28 @@ def call_openai_api(messages: list) -> str:
     Returns:
         str: The response from the OpenAI API.
     """
-    logging.info(f"OpenAI request")
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        max_tokens=300,
-        temperature=0.7
-    )
-
-    response = response.choices[0].message.content
+    time.sleep(5)
+    logger.info(f"OpenAI request")
     
-    logging.info(f"OpenAI response: {response}")
+    request_bytes = cache.get(request_id)
+    request = json.loads(request_bytes.decode('utf-8'))
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            max_tokens=300,
+            temperature=0.7
+        )
 
-    return response
+        response = response.choices[0].message.content
+    
+        logger.info(f"OpenAI response: {response}")
+        
+        request['status'] = 'completed'
+        request['result'] = response
+        cache.set(request_id, json.dumps(request))
+
+    except Exception as e:
+        request['status'] = 'failed'
+        request['result'] = str(e)
+        cache.set(request_id, json.dumps(request))
