@@ -43,7 +43,7 @@ def verify_fine_tuned_model(fine_tuned_model_id):
     model=fine_tuned_model_id,
     messages=build_chat_message(),
     max_tokens=100,
-    temperature=0.7
+    temperature=0
   )
   
   return completion.choices[0].message

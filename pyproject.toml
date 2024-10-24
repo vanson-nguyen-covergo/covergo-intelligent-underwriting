@@ -13,9 +13,13 @@ openai = "^1.51.2"
 pydantic = "^2.9.2"
 requests = "^2.32.3"
 pymemcache = "^4.0.0"
+pandas = "^2.2.3"
 
 [tool.poetry.scripts]
 runserver = "run_server:main"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
 
 [build-system]
 requires = ["poetry-core"]
